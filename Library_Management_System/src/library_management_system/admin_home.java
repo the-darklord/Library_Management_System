@@ -26,9 +26,9 @@ public class admin_home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        NewStudent = new javax.swing.JButton();
-        NewLibrarian = new javax.swing.JButton();
-        NewBook = new javax.swing.JButton();
+        ManageStudents = new javax.swing.JButton();
+        ManageLibrarians = new javax.swing.JButton();
+        ManageBooks = new javax.swing.JButton();
         Statistics = new javax.swing.JButton();
         Logout = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -37,44 +37,44 @@ public class admin_home extends javax.swing.JFrame {
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        NewStudent.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
-        NewStudent.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/newstudent.jpg"))); // NOI18N
-        NewStudent.setText("New Student");
-        NewStudent.setMaximumSize(new java.awt.Dimension(200, 75));
-        NewStudent.setMinimumSize(new java.awt.Dimension(200, 75));
-        NewStudent.setPreferredSize(new java.awt.Dimension(200, 75));
-        NewStudent.addActionListener(new java.awt.event.ActionListener() {
+        ManageStudents.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
+        ManageStudents.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/newstudent.jpg"))); // NOI18N
+        ManageStudents.setText("Manage Students");
+        ManageStudents.setMaximumSize(new java.awt.Dimension(200, 75));
+        ManageStudents.setMinimumSize(new java.awt.Dimension(200, 75));
+        ManageStudents.setPreferredSize(new java.awt.Dimension(200, 75));
+        ManageStudents.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewStudentActionPerformed(evt);
+                ManageStudentsActionPerformed(evt);
             }
         });
-        getContentPane().add(NewStudent, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, 230, 110));
+        getContentPane().add(ManageStudents, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 105, 270, 110));
 
-        NewLibrarian.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
-        NewLibrarian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/newlibrarian.png"))); // NOI18N
-        NewLibrarian.setText("New Librarian");
-        NewLibrarian.setMaximumSize(new java.awt.Dimension(100, 25));
-        NewLibrarian.setMinimumSize(new java.awt.Dimension(100, 25));
-        NewLibrarian.setPreferredSize(new java.awt.Dimension(200, 75));
-        NewLibrarian.addActionListener(new java.awt.event.ActionListener() {
+        ManageLibrarians.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
+        ManageLibrarians.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/newlibrarian.png"))); // NOI18N
+        ManageLibrarians.setText("Manage Librarians");
+        ManageLibrarians.setMaximumSize(new java.awt.Dimension(100, 25));
+        ManageLibrarians.setMinimumSize(new java.awt.Dimension(100, 25));
+        ManageLibrarians.setPreferredSize(new java.awt.Dimension(200, 75));
+        ManageLibrarians.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewLibrarianActionPerformed(evt);
+                ManageLibrariansActionPerformed(evt);
             }
         });
-        getContentPane().add(NewLibrarian, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, 240, 110));
+        getContentPane().add(ManageLibrarians, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 230, 300, 110));
 
-        NewBook.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
-        NewBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/newbook.png"))); // NOI18N
-        NewBook.setText("New Book");
-        NewBook.setMaximumSize(new java.awt.Dimension(100, 25));
-        NewBook.setMinimumSize(new java.awt.Dimension(100, 25));
-        NewBook.setPreferredSize(new java.awt.Dimension(200, 75));
-        NewBook.addActionListener(new java.awt.event.ActionListener() {
+        ManageBooks.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
+        ManageBooks.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/newbook.png"))); // NOI18N
+        ManageBooks.setText("Manage Books");
+        ManageBooks.setMaximumSize(new java.awt.Dimension(100, 25));
+        ManageBooks.setMinimumSize(new java.awt.Dimension(100, 25));
+        ManageBooks.setPreferredSize(new java.awt.Dimension(200, 75));
+        ManageBooks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                NewBookActionPerformed(evt);
+                ManageBooksActionPerformed(evt);
             }
         });
-        getContentPane().add(NewBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 230, 110));
+        getContentPane().add(ManageBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 360, 270, 110));
 
         Statistics.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
         Statistics.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/statistics.jpg"))); // NOI18N
@@ -87,7 +87,7 @@ public class admin_home extends javax.swing.JFrame {
                 StatisticsActionPerformed(evt);
             }
         });
-        getContentPane().add(Statistics, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 480, 240, 110));
+        getContentPane().add(Statistics, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 480, 300, 110));
 
         Logout.setFont(new java.awt.Font("Segoe UI Black", 2, 18)); // NOI18N
         Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/logout.jpg"))); // NOI18N
@@ -100,7 +100,7 @@ public class admin_home extends javax.swing.JFrame {
                 LogoutActionPerformed(evt);
             }
         });
-        getContentPane().add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 615, 230, 110));
+        getContentPane().add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 615, 270, 110));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/admin_home.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -108,20 +108,20 @@ public class admin_home extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void NewStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewStudentActionPerformed
+    private void ManageStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageStudentsActionPerformed
         // TODO add your handling code here:
-        new NewStudent().setVisible(true);
-    }//GEN-LAST:event_NewStudentActionPerformed
+        new ManageStudents().setVisible(true);
+    }//GEN-LAST:event_ManageStudentsActionPerformed
 
-    private void NewLibrarianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewLibrarianActionPerformed
+    private void ManageLibrariansActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageLibrariansActionPerformed
         // TODO add your handling code here:
-        new NewLibrarian().setVisible(true);
-    }//GEN-LAST:event_NewLibrarianActionPerformed
+        new ManageLibrarians().setVisible(true);
+    }//GEN-LAST:event_ManageLibrariansActionPerformed
 
-    private void NewBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewBookActionPerformed
+    private void ManageBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ManageBooksActionPerformed
         // TODO add your handling code here:
-        new NewBook().setVisible(true);
-    }//GEN-LAST:event_NewBookActionPerformed
+        new ManageBooks().setVisible(true);
+    }//GEN-LAST:event_ManageBooksActionPerformed
 
     private void StatisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StatisticsActionPerformed
         // TODO add your handling code here:
@@ -171,9 +171,9 @@ public class admin_home extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Logout;
-    private javax.swing.JButton NewBook;
-    private javax.swing.JButton NewLibrarian;
-    private javax.swing.JButton NewStudent;
+    private javax.swing.JButton ManageBooks;
+    private javax.swing.JButton ManageLibrarians;
+    private javax.swing.JButton ManageStudents;
     private javax.swing.JButton Statistics;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

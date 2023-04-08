@@ -4,6 +4,7 @@
  */
 package library_management_system;
 
+import Project.Encryption;
 import Project.ConnectionProvider;
 import java.sql.*;
 import javax.swing.*;
@@ -182,9 +183,12 @@ public class NewLibrarian extends javax.swing.JFrame {
             st.setString(4,mobilenumber);
             st.setString(5,address);
             int i=st.executeUpdate();
-            PreparedStatement pt=con.prepareStatement("INSERT INTO LIBRARIAN_CREDENTIALS VALUES(?,?)");
+            PreparedStatement pt=con.prepareStatement("INSERT INTO LIBRARIAN_CREDENTIALS VALUES(?,?,?)");
             pt.setString(1, librarianid);
-            pt.setString(2,password);
+            String salt=Encryption.genRandString(5);
+            String hash=Encryption.encrypt(password, salt);
+            pt.setString(2,hash);
+            pt.setString(3, salt);
             int j=pt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Successfully Updated.");
             setVisible(false);

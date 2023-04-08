@@ -5,6 +5,7 @@
 package library_management_system;
 
 import Project.ConnectionProvider;
+import Project.Encryption;
 import java.sql.*;
 import javax.swing.*;
 
@@ -220,9 +221,12 @@ public class NewStudent extends javax.swing.JFrame {
             st.setString(7,branchname);
             st.setString(8,address);
             int i=st.executeUpdate();
-            PreparedStatement pt=con.prepareStatement("INSERT INTO STUDENT_CREDENTIALS VALUES(?,?)");
+            PreparedStatement pt=con.prepareStatement("INSERT INTO STUDENT_CREDENTIALS VALUES(?,?,?)");
             pt.setString(1, studentid);
-            pt.setString(2,password);
+            String salt=Encryption.genRandString(5);
+            String hash=Encryption.encrypt(password, salt);
+            pt.setString(2,hash);
+            pt.setString(3, salt);
             int j=pt.executeUpdate();
             JOptionPane.showMessageDialog(null,"Successfully Updated.");
             setVisible(false);
