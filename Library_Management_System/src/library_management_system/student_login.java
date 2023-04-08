@@ -4,6 +4,10 @@
  */
 package library_management_system;
 
+import Project.*;
+import java.sql.*;
+import javax.swing.*;
+
 /**
  *
  * @author SAIMIHIRNATH
@@ -85,8 +89,38 @@ public class student_login extends javax.swing.JFrame {
 
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-        setVisible(false);
-        new student_home().setVisible(true);
+        String userid=UserIDValue.getText();
+        String password=PasswordValue.getText();
+        try
+        {
+            Connection con=ConnectionProvider.getCon();
+            PreparedStatement st=con.prepareStatement("select * from student_credentials where studentid=?");
+            st.setString(1,userid);
+            ResultSet rs=st.executeQuery();
+            if(rs.next()==false)
+            {
+                JOptionPane.showMessageDialog(null,"User doesn't exist");
+            }
+            else
+            {
+                String correctHash=rs.getString(2);
+                String salt=rs.getString(3);
+                String enteredHash=Encryption.encrypt(password, salt);
+                if(enteredHash.matches(correctHash))
+                {
+                    setVisible(false);
+                    new student_home().setVisible(true);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null,"Incorrect Password");
+                }
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
     }//GEN-LAST:event_LoginActionPerformed
 
     /**
