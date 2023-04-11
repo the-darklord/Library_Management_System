@@ -4,9 +4,14 @@
  */
 package library_management_system;
 
+import java.sql.*;
+import Project.*;
+import javax.swing.*;
+import javax.swing.table.*;
+
 /**
  *
- * @author yelam
+ * @author SAIMIHIRNATH
  */
 public class Statistics extends javax.swing.JFrame {
 
@@ -15,6 +20,8 @@ public class Statistics extends javax.swing.JFrame {
      */
     public Statistics() {
         initComponents();
+        setIssueDetailsToTable();
+        setReturnDetailsToTable();
     }
 
     /**
@@ -30,90 +37,177 @@ public class Statistics extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setLocation(new java.awt.Point(325, 125));
         setUndecorated(true);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Issue Details");
+        jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("RETURN DETAILS");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-100, 450, 1740, 34));
 
+        jTable1.setBackground(new java.awt.Color(255, 255, 153));
+        jTable1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "StudentID", "Name", "BookID", "Name", "IssuedDate", "DueDate"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable1.setShowGrid(true);
+        jTable1.setSurrendersFocusOnKeystroke(true);
+        jTable1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jTable1ComponentShown(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        jLabel2.setText("Return Details");
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1530, 378));
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("ISSUE DETAILS");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 1280, 48));
+
+        jTable3.setBackground(new java.awt.Color(255, 255, 153));
+        jTable3.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "StudentID", "Name", "BookID", "Name", "IssuedDate", "DueDate", "ReturnedDate"
             }
-        ));
-        jScrollPane2.setViewportView(jTable2);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
 
-        jButton1.setText("Close");
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable3.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jTable3ComponentShown(evt);
+            }
+        });
+        jScrollPane3.setViewportView(jTable3);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(298, 298, 298)
-                                .addComponent(jLabel1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(292, 292, 292)
-                                .addComponent(jLabel2)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(50, 50, 50))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton1)
-                .addContainerGap(18, Short.MAX_VALUE))
-        );
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 490, 1530, 590));
+
+        jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jButton1.setText("CLOSE");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1414, 8, 130, 50));
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/black-gradient-b9-1920x1080.jpg"))); // NOI18N
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new admin_home().setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jTable1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentShown
+        // TODO add your handling code here:
+        setIssueDetailsToTable();
+    }//GEN-LAST:event_jTable1ComponentShown
+
+    public void setIssueDetailsToTable()
+    {
+        DefaultTableModel model;
+        try{
+            Connection con = ConnectionProvider.getCon();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select s.studentid,s.name,bookid,book.name,issueddate,duedate from student s,book natural join issue where s.studentid=issue.studentid and returneddate='-'");
+            
+            while(rs.next()){
+                String studentid = rs.getString(1);
+                String sname = rs.getString(2);
+                String bookid = rs.getString(3);
+                String bname = rs.getString(4);
+                String issueddate = rs.getString(5);
+                String duedate = rs.getString(6);
+                
+                Object[] obj ={studentid,sname,bookid,bname,issueddate,duedate};
+                model = (DefaultTableModel)jTable1.getModel();
+                model.addRow(obj);     
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    
+    public void setReturnDetailsToTable()
+    {
+        DefaultTableModel model;
+        try{
+            Connection con = ConnectionProvider.getCon();
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery("select s.studentid,s.name,bookid,book.name,issueddate,duedate,returneddate from student s,book natural join issue where s.studentid=issue.studentid and returneddate<>'-'");
+            
+            while(rs.next()){
+                String studentid = rs.getString(1);
+                String sname = rs.getString(2);
+                String bookid = rs.getString(3);
+                String bname = rs.getString(4);
+                String issueddate = rs.getString(5);
+                String duedate = rs.getString(6);
+                String returneddate=rs.getString(7);
+                
+                Object[] obj ={studentid,sname,bookid,bname,issueddate,duedate,returneddate};
+                model = (DefaultTableModel)jTable3.getModel();
+                model.addRow(obj);     
+            }
+        }
+        catch(Exception e){
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
+    }
+    
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        // TODO add your handling code here:
+        setIssueDetailsToTable();
+        setReturnDetailsToTable();
+    }//GEN-LAST:event_formComponentShown
+
+    private void jTable3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable3ComponentShown
+        // TODO add your handling code here:
+        setReturnDetailsToTable();
+    }//GEN-LAST:event_jTable3ComponentShown
 
     /**
      * @param args the command line arguments
@@ -154,9 +248,10 @@ public class Statistics extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
     // End of variables declaration//GEN-END:variables
 }

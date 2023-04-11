@@ -36,7 +36,7 @@ BookID varchar(10),
 StudentID varchar(10),
 IssuedDate varchar(20),
 DueDate varchar(20),
-ReturnedDate varchar(5)
+ReturnedDate varchar(20)
 );
 
 create table Librarian(
