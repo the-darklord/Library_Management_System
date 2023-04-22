@@ -25,11 +25,13 @@ Address varchar(50)
 CREATE TABLE Book(
 BookID varchar(10),
 Name varchar(100),
+Author varchar(100),
 Publisher Varchar(100),
 Price varchar(10),
 PublishedYear varchar(5),
 Capacity varchar(10)
 );
+
 
 CREATE TABLE Issue(
 BookID varchar(10),

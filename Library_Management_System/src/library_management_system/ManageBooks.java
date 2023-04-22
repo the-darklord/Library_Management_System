@@ -32,12 +32,13 @@ public class ManageBooks extends javax.swing.JFrame {
             while(rs.next()){
                 String bookid = rs.getString(1);
                 String name = rs.getString(2);
-                String publisher = rs.getString(3);
-                String price = rs.getString(4);
-                String publishedyear = rs.getString(5);
-                String capacity = rs.getString(6);
+                String author=rs.getString(3);
+                String publisher = rs.getString(4);
+                String price = rs.getString(5);
+                String publishedyear = rs.getString(6);
+                String capacity = rs.getString(7);
                 
-                Object[] obj ={bookid,name,publisher,price,publishedyear,capacity};
+                Object[] obj ={bookid,name,author,publisher,price,publishedyear,capacity};
                 model = (DefaultTableModel)BookTable.getModel();
                 model.addRow(obj);     
             }
@@ -80,6 +81,8 @@ public class ManageBooks extends javax.swing.JFrame {
         Update = new javax.swing.JButton();
         Delete = new javax.swing.JButton();
         Close = new javax.swing.JButton();
+        Author = new javax.swing.JLabel();
+        AuthorValue = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -92,14 +95,14 @@ public class ManageBooks extends javax.swing.JFrame {
 
             },
             new String [] {
-                "BOOKID", "NAME", "PUBLISHER", "PRICE", "PUBLISHEDYEAR", "CAPACITY"
+                "BOOKID", "NAME", "AUTHOR", "PUBLISHER", "PRICE", "PUBLISHEDYEAR", "CAPACITY"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -112,6 +115,7 @@ public class ManageBooks extends javax.swing.JFrame {
         });
         BookTable.setColumnSelectionAllowed(true);
         BookTable.setShowGrid(true);
+        BookTable.getTableHeader().setReorderingAllowed(false);
         BookTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 BookTableMouseClicked(evt);
@@ -126,19 +130,18 @@ public class ManageBooks extends javax.swing.JFrame {
             BookTable.getColumnModel().getColumn(3).setResizable(false);
             BookTable.getColumnModel().getColumn(4).setResizable(false);
             BookTable.getColumnModel().getColumn(5).setResizable(false);
+            BookTable.getColumnModel().getColumn(6).setResizable(false);
         }
         BookTable.getAccessibleContext().setAccessibleDescription("");
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 100, 960, 964));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 100, 960, 690));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Black", 1, 65)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MANAGE BOOKS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 10, 960, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, 960, -1));
 
         StudentID.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        StudentID.setForeground(new java.awt.Color(255, 255, 255));
         StudentID.setText("Book ID");
         getContentPane().add(StudentID, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, -1, -1));
 
@@ -146,7 +149,6 @@ public class ManageBooks extends javax.swing.JFrame {
         getContentPane().add(BookIDValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 100, 336, -1));
 
         Name.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        Name.setForeground(new java.awt.Color(255, 255, 255));
         Name.setText("Name");
         getContentPane().add(Name, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
@@ -159,36 +161,32 @@ public class ManageBooks extends javax.swing.JFrame {
         getContentPane().add(NameValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 180, 336, -1));
 
         Publisher.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        Publisher.setForeground(new java.awt.Color(255, 255, 255));
         Publisher.setText("Publisher");
-        getContentPane().add(Publisher, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, -1, -1));
+        getContentPane().add(Publisher, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
 
         PublisherValue.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        getContentPane().add(PublisherValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 250, 336, -1));
+        getContentPane().add(PublisherValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 336, -1));
 
         Price.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        Price.setForeground(new java.awt.Color(255, 255, 255));
         Price.setText("Price");
-        getContentPane().add(Price, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+        getContentPane().add(Price, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 410, -1, -1));
 
         PriceValue.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        getContentPane().add(PriceValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 330, 336, -1));
+        getContentPane().add(PriceValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 410, 336, -1));
 
         PublishedYear.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        PublishedYear.setForeground(new java.awt.Color(255, 255, 255));
         PublishedYear.setText("Published Year");
-        getContentPane().add(PublishedYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 420, -1, -1));
+        getContentPane().add(PublishedYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 500, -1, -1));
 
         PublishedYearValue.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        getContentPane().add(PublishedYearValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 420, 336, -1));
+        getContentPane().add(PublishedYearValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 500, 336, -1));
 
         Capacity.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        Capacity.setForeground(new java.awt.Color(255, 255, 255));
         Capacity.setText("Capacity");
-        getContentPane().add(Capacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, -1, -1));
+        getContentPane().add(Capacity, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 590, -1, -1));
 
         CapacityValue.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
-        getContentPane().add(CapacityValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 510, 336, -1));
+        getContentPane().add(CapacityValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 590, 336, -1));
 
         Add.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         Add.setText("ADD");
@@ -197,7 +195,7 @@ public class ManageBooks extends javax.swing.JFrame {
                 AddActionPerformed(evt);
             }
         });
-        getContentPane().add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 688, 138, -1));
+        getContentPane().add(Add, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 670, 138, -1));
 
         Update.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         Update.setText("UPDATE");
@@ -206,7 +204,7 @@ public class ManageBooks extends javax.swing.JFrame {
                 UpdateActionPerformed(evt);
             }
         });
-        getContentPane().add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(205, 688, -1, -1));
+        getContentPane().add(Update, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 670, -1, -1));
 
         Delete.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         Delete.setText("DELETE");
@@ -215,7 +213,7 @@ public class ManageBooks extends javax.swing.JFrame {
                 DeleteActionPerformed(evt);
             }
         });
-        getContentPane().add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(386, 688, 145, -1));
+        getContentPane().add(Delete, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 670, 145, -1));
 
         Close.setFont(new java.awt.Font("Segoe UI Black", 1, 36)); // NOI18N
         Close.setText("CLOSE");
@@ -224,9 +222,17 @@ public class ManageBooks extends javax.swing.JFrame {
                 CloseActionPerformed(evt);
             }
         });
-        getContentPane().add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(18, 756, 513, 54));
+        getContentPane().add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(13, 730, 530, 54));
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/1920x1080-purple-web-solid-color-background.jpg"))); // NOI18N
+        Author.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        Author.setText("Author");
+        Author.setPreferredSize(new java.awt.Dimension(118, 33));
+        getContentPane().add(Author, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 258, 128, -1));
+
+        AuthorValue.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
+        getContentPane().add(AuthorValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 260, 330, 33));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/light-color-pink-and-blue-background-8zrww1yggwb8mbh3.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -246,6 +252,7 @@ public class ManageBooks extends javax.swing.JFrame {
         // TODO add your handling code here:
         String bookid=BookIDValue.getText();
         String name=NameValue.getText();
+        String author=AuthorValue.getText();
         String publisher=PublisherValue.getText();
         String price=PriceValue.getText();
         String publishedyear=PublishedYearValue.getText();
@@ -253,13 +260,14 @@ public class ManageBooks extends javax.swing.JFrame {
         try
         {
             Connection con=ConnectionProvider.getCon();
-            PreparedStatement st=con.prepareStatement("INSERT INTO BOOK VALUES(?,?,?,?,?,?)");
+            PreparedStatement st=con.prepareStatement("INSERT INTO BOOK VALUES(?,?,?,?,?,?,?)");
             st.setString(1,bookid);
             st.setString(2,name);
-            st.setString(3,publisher);
-            st.setString(4,price);
-            st.setString(5,publishedyear);
-            st.setString(6,capacity);
+            st.setString(3,author);
+            st.setString(4,publisher);
+            st.setString(5,price);
+            st.setString(6,publishedyear);
+            st.setString(7,capacity);
             int i=st.executeUpdate(); 
             JOptionPane.showMessageDialog(null,"Successfully Added.");
             clearTable();
@@ -277,6 +285,7 @@ public class ManageBooks extends javax.swing.JFrame {
         // TODO add your handling code here:
         String bookid=BookIDValue.getText();
         String name=NameValue.getText();
+        String author=AuthorValue.getText();
         String publisher=PublisherValue.getText();
         String price=PriceValue.getText();
         String publishedyear=PublishedYearValue.getText();
@@ -284,13 +293,14 @@ public class ManageBooks extends javax.swing.JFrame {
         try
         {
             Connection con=ConnectionProvider.getCon();
-            PreparedStatement st=con.prepareStatement("UPDATE BOOK SET NAME=?,PUBLISHER=?,PRICE=?,PUBLISHEDYEAR=?,CAPACITY=? WHERE BOOKID=?");
+            PreparedStatement st=con.prepareStatement("UPDATE BOOK SET NAME=?,AUTHOR=?,PUBLISHER=?,PRICE=?,PUBLISHEDYEAR=?,CAPACITY=? WHERE BOOKID=?");
             st.setString(1,name);
-            st.setString(2,publisher);
-            st.setString(3,price);
-            st.setString(4,publishedyear);
-            st.setString(5,capacity);
-            st.setString(6,bookid);
+            st.setString(2,author);
+            st.setString(3,publisher);
+            st.setString(4,price);
+            st.setString(5,publishedyear);
+            st.setString(6,capacity);
+            st.setString(7,bookid);
             int i=st.executeUpdate();
             JOptionPane.showMessageDialog(null,"Successfully Updated.");
             clearTable();
@@ -333,10 +343,11 @@ public class ManageBooks extends javax.swing.JFrame {
         
         BookIDValue.setText(model.getValueAt(rowNo, 0).toString());
         NameValue.setText(model.getValueAt(rowNo, 1).toString());
-        PublisherValue.setText(model.getValueAt(rowNo, 2).toString());
-        PriceValue.setText(model.getValueAt(rowNo, 3).toString());
-        PublishedYearValue.setText(model.getValueAt(rowNo, 4).toString());
-        CapacityValue.setText(model.getValueAt(rowNo, 5).toString());
+        AuthorValue.setText(model.getValueAt(rowNo,2).toString());
+        PublisherValue.setText(model.getValueAt(rowNo, 3).toString());
+        PriceValue.setText(model.getValueAt(rowNo, 4).toString());
+        PublishedYearValue.setText(model.getValueAt(rowNo, 5).toString());
+        CapacityValue.setText(model.getValueAt(rowNo, 6).toString());
     }//GEN-LAST:event_BookTableMouseClicked
 
     /**
@@ -377,6 +388,8 @@ public class ManageBooks extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Add;
+    private javax.swing.JLabel Author;
+    private javax.swing.JTextField AuthorValue;
     private javax.swing.JTextField BookIDValue;
     private javax.swing.JTable BookTable;
     private javax.swing.JLabel Capacity;
