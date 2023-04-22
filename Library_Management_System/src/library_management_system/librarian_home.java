@@ -26,21 +26,69 @@ public class librarian_home extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        IssueBook = new javax.swing.JButton();
+        ReturnBook = new javax.swing.JButton();
+        Logout = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1920, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1080, Short.MAX_VALUE)
-        );
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setUndecorated(true);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        IssueBook.setFont(new java.awt.Font("Segoe UI Black", 1, 30)); // NOI18N
+        IssueBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/issue.png"))); // NOI18N
+        IssueBook.setText("ISSUE BOOK");
+        IssueBook.setPreferredSize(new java.awt.Dimension(350, 110));
+        IssueBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IssueBookActionPerformed(evt);
+            }
+        });
+        getContentPane().add(IssueBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 30, -1, -1));
+
+        ReturnBook.setFont(new java.awt.Font("Segoe UI Black", 1, 30)); // NOI18N
+        ReturnBook.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/return-book-1-560407.png"))); // NOI18N
+        ReturnBook.setText("RETURN BOOK");
+        ReturnBook.setPreferredSize(new java.awt.Dimension(350, 110));
+        ReturnBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnBookActionPerformed(evt);
+            }
+        });
+        getContentPane().add(ReturnBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 30, -1, -1));
+
+        Logout.setFont(new java.awt.Font("Segoe UI Black", 1, 30)); // NOI18N
+        Logout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/logout-removebg-preview.png"))); // NOI18N
+        Logout.setText("LOGOUT");
+        Logout.setPreferredSize(new java.awt.Dimension(350, 110));
+        Logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Logout, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 30, -1, -1));
+
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/SMS_9732 copy_d.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void IssueBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IssueBookActionPerformed
+        // TODO add your handling code here:
+        new IssueBook().setVisible(true);
+    }//GEN-LAST:event_IssueBookActionPerformed
+
+    private void ReturnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnBookActionPerformed
+        // TODO add your handling code here:
+        new ReturnBook().setVisible(true);
+    }//GEN-LAST:event_ReturnBookActionPerformed
+
+    private void LogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutActionPerformed
+        // TODO add your handling code here:
+        setVisible(false);
+        new login().setVisible(true);
+    }//GEN-LAST:event_LogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -78,5 +126,9 @@ public class librarian_home extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton IssueBook;
+    private javax.swing.JButton Logout;
+    private javax.swing.JButton ReturnBook;
+    private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

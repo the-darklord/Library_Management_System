@@ -292,7 +292,6 @@ public class ManageStudents extends javax.swing.JFrame {
     private void CloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseActionPerformed
         // TODO add your handling code here:
         setVisible(false);
-        new admin_home().setVisible(true);
     }//GEN-LAST:event_CloseActionPerformed
 
     private void AddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddActionPerformed
