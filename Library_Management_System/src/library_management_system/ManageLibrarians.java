@@ -331,13 +331,16 @@ public class ManageLibrarians extends javax.swing.JFrame {
             st.setString(4,address);
             st.setString(5,librarianid);
             int i=st.executeUpdate();
-            PreparedStatement pt=con.prepareStatement("UPDATE LIBRARIAN_CREDENTIALS SET PASSWORD=?,SALT=? WHERE LIBRARIANID=?");
-            String salt=Encryption.genRandString(5);
-            String hash=Encryption.encrypt(password, salt);
-            pt.setString(1,hash);
-            pt.setString(2, salt);
-            pt.setString(3, librarianid);
-            int j=pt.executeUpdate();
+            if(!password.matches(""))
+            {
+                PreparedStatement pt=con.prepareStatement("UPDATE LIBRARIAN_CREDENTIALS SET PASSWORD=?,SALT=? WHERE LIBRARIANID=?");
+                String salt=Encryption.genRandString(5);
+                String hash=Encryption.encrypt(password, salt);
+                pt.setString(1,hash);
+                pt.setString(2, salt);
+                pt.setString(3, librarianid);
+                int j=pt.executeUpdate();
+            }
             JOptionPane.showMessageDialog(null,"Successfully Updated.");
             clearTable();
             setLibrarianDetailsToTable();

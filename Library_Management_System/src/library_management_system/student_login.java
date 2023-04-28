@@ -20,7 +20,7 @@ public class student_login extends javax.swing.JFrame {
     public student_login() {
         initComponents();
     }
-
+    String userid;
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,9 +87,10 @@ public class student_login extends javax.swing.JFrame {
         new login().setVisible(true);
     }//GEN-LAST:event_CloseActionPerformed
 
+    
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         // TODO add your handling code here:
-        String userid=UserIDValue.getText();
+        userid=UserIDValue.getText();
         String password=PasswordValue.getText();
         try
         {
@@ -108,6 +109,9 @@ public class student_login extends javax.swing.JFrame {
                 String enteredHash=Encryption.encrypt(password, salt);
                 if(enteredHash.matches(correctHash))
                 {
+                    st=con.prepareStatement("insert into log_student values(?,current_date,current_timestamp)");
+                    st.setString(1,userid);
+                    st.executeUpdate();
                     setVisible(false);
                     new student_home().setVisible(true);
                 }

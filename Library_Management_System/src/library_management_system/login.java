@@ -74,7 +74,8 @@ public class login extends javax.swing.JFrame {
         });
         getContentPane().add(Close, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 790, 520, -1));
 
-        Person.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/profile-icon-png-905.png"))); // NOI18N
+        Person.setBackground(new java.awt.Color(0, 0, 0));
+        Person.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/Untitled design.png"))); // NOI18N
         Person.setOpaque(true);
         getContentPane().add(Person, new org.netbeans.lib.awtextra.AbsoluteConstraints(850, 20, 520, 530));
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 360, -1, -1));

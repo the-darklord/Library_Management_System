@@ -20,6 +20,7 @@ public class Statistics extends javax.swing.JFrame {
      */
     public Statistics() {
         initComponents();
+        clearTable();
         setIssueDetailsToTable();
         setReturnDetailsToTable();
     }
@@ -57,8 +58,7 @@ public class Statistics extends javax.swing.JFrame {
         jLabel1.setText("RETURN DETAILS");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-100, 450, 1740, 34));
 
-        jTable1.setBackground(new java.awt.Color(255, 255, 153));
-        jTable1.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -112,8 +112,7 @@ public class Statistics extends javax.swing.JFrame {
         jLabel2.setText("ISSUE DETAILS");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, 1280, 48));
 
-        jTable3.setBackground(new java.awt.Color(255, 255, 153));
-        jTable3.setFont(new java.awt.Font("Segoe UI", 1, 10)); // NOI18N
+        jTable3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -173,6 +172,11 @@ public class Statistics extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void clearTable(){
+          DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+          model.setRowCount(0);
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
@@ -180,7 +184,6 @@ public class Statistics extends javax.swing.JFrame {
 
     private void jTable1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable1ComponentShown
         // TODO add your handling code here:
-        setIssueDetailsToTable();
     }//GEN-LAST:event_jTable1ComponentShown
 
     public void setIssueDetailsToTable()
@@ -240,13 +243,13 @@ public class Statistics extends javax.swing.JFrame {
     
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
+        clearTable();
         setIssueDetailsToTable();
         setReturnDetailsToTable();
     }//GEN-LAST:event_formComponentShown
 
     private void jTable3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable3ComponentShown
         // TODO add your handling code here:
-        setReturnDetailsToTable();
     }//GEN-LAST:event_jTable3ComponentShown
 
     /**

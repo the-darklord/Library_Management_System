@@ -19,6 +19,7 @@ public class SearchBooks extends javax.swing.JFrame {
      */
     public SearchBooks() {
         initComponents();
+        clearTable();
     }
     public void clearTable(){
           DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
@@ -182,10 +183,16 @@ public class SearchBooks extends javax.swing.JFrame {
         clearTable();
         DefaultTableModel model;
         try{
+            String bname=jTextField1.getText();
+            String auth=jTextField2.getText();
+            String pub=jTextField3.getText();
             Connection con = ConnectionProvider.getCon();
-            Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select bookid,name,author,publisher,capacity from book");
-            
+            PreparedStatement st=con.prepareStatement("select bookid,name,author,publisher,capacity from book where name=? or author=? or publisher=?");
+            st.setString(1,bname);
+            st.setString(2,auth);
+            st.setString(3,pub);
+            ResultSet rs=st.executeQuery();
+                        
             while(rs.next()){
                 String bookid = rs.getString(1);
                 String name = rs.getString(2);
@@ -206,7 +213,10 @@ public class SearchBooks extends javax.swing.JFrame {
                 
                 Object[] obj ={bookid,name,author,publisher,availability};
                 model = (DefaultTableModel)jTable1.getModel();
-                model.addRow(obj);     
+                model.addRow(obj);
+                jTextField1.setText("");
+                jTextField2.setText("");
+                jTextField3.setText("");
             }
         }
         catch(Exception e){

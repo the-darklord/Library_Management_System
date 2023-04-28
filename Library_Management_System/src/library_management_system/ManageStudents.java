@@ -63,6 +63,7 @@ public class ManageStudents extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane1 = new javax.swing.JScrollPane();
         StudentTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -190,11 +191,13 @@ public class ManageStudents extends javax.swing.JFrame {
         Gender.setText("Gender");
         getContentPane().add(Gender, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 300, -1, -1));
 
+        buttonGroup1.add(Male);
         Male.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         Male.setForeground(new java.awt.Color(255, 255, 255));
         Male.setText("Male");
         getContentPane().add(Male, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 300, 123, -1));
 
+        buttonGroup1.add(Female);
         Female.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         Female.setForeground(new java.awt.Color(255, 255, 255));
         Female.setText("Female");
@@ -377,13 +380,16 @@ public class ManageStudents extends javax.swing.JFrame {
             st.setString(7,address);
             st.setString(8,studentid);
             int i=st.executeUpdate();
-            PreparedStatement pt=con.prepareStatement("UPDATE STUDENT_CREDENTIALS SET PASSWORD=?,SALT=? WHERE STUDENTID=?");
-            String salt=Encryption.genRandString(5);
-            String hash=Encryption.encrypt(password, salt);
-            pt.setString(1,hash);
-            pt.setString(2, salt);
-            pt.setString(3, studentid);
-            int j=pt.executeUpdate();
+            if(!password.matches(""))
+            {
+                PreparedStatement pt=con.prepareStatement("UPDATE STUDENT_CREDENTIALS SET PASSWORD=?,SALT=? WHERE STUDENTID=?");
+                String salt=Encryption.genRandString(5);
+                String hash=Encryption.encrypt(password, salt);
+                pt.setString(1,hash);
+                pt.setString(2, salt);
+                pt.setString(3, studentid);
+                int j=pt.executeUpdate();
+            }
             JOptionPane.showMessageDialog(null,"Successfully Updated.");
             clearTable();
             setStudentDetailsToTable();
@@ -500,6 +506,7 @@ public class ManageStudents extends javax.swing.JFrame {
     private javax.swing.JTextField StudentIDValue;
     private javax.swing.JTable StudentTable;
     private javax.swing.JButton Update;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

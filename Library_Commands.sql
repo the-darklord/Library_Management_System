@@ -1,3 +1,5 @@
+drop table log_student;
+
 drop table student_credentials;
 
 drop table librarian_credentials;
@@ -61,6 +63,12 @@ Password varchar(100) not null,
 salt varchar(20) not null
 );
 
+create table log_student(
+    StudentID varchar(10),
+    Log_Date date,
+    Log_Time timestamp
+);
+
 alter table student add constraint PK_STUDENTID PRIMARY KEY(StudentID);
 
 alter table book add constraint PK_BOOKID PRIMARY KEY(BookID);
@@ -80,3 +88,5 @@ alter table librarian_credentials add constraint FK_LIBRARIANID_CREDENTIALS FORE
 alter table student_credentials add constraint PK_STUDENTID_CREDENTIALS PRIMARY KEY(StudentID);
 
 alter table librarian_credentials add constraint PK_LIBRARIANID_CREDENTIALS PRIMARY KEY(LibrarianID);
+
+alter table log_student add constraint FK_STUDENTID_LOG FOREIGN KEY(StudentID) references Student(StudentID) ON DELETE CASCADE;

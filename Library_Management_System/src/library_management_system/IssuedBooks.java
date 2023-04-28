@@ -4,6 +4,12 @@
  */
 package library_management_system;
 
+import java.util.*;
+import Project.*;
+import java.sql.*;
+import javax.swing.table.*;
+
+
 /**
  *
  * @author yelam
@@ -15,8 +21,15 @@ public class IssuedBooks extends javax.swing.JFrame {
      */
     public IssuedBooks() {
         initComponents();
+        clearTable();
+        setIssuedBooksToTable();
     }
-
+    
+    public void clearTable(){
+          DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
+          model.setRowCount(0);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,6 +114,90 @@ public class IssuedBooks extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public static int calculatefine(String sid,String bid)
+    {
+        int days=0;
+        try
+        {
+            Connection con=ConnectionProvider.getCon();
+            PreparedStatement st=con.prepareStatement("select returneddate,issueddate from issue where studentid=? and bookid=?");
+            st.setString(1,sid);
+            st.setString(2,bid);
+            ResultSet rs=st.executeQuery();
+            String rd="";
+            String id="";
+            while(rs.next())
+            {
+                rd=rs.getString(1);
+                id=rs.getString(2);
+            }
+            if(rd.matches("-"))
+            {
+                st=con.prepareStatement("select extract(day from sysdate - to_date(?,?) from dual");
+                st.setString(1,id);
+                st.setString(2, "YYYY-MM-DD");
+            }
+            else
+            {
+                st=con.prepareStatement("select extract(day from to_date(?,?) - to_date(?,?) from dual");
+                st.setString(1,rd);
+                st.setString(2, "YYYY-MM-DD");
+                st.setString(3,id);
+                st.setString(4, "YYYY-MM-DD");
+            }
+            rs=st.executeQuery();
+            while(rs.next())
+            {
+                days=Integer.valueOf(rs.getString(1));
+            }
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+        }
+        return days;
+    }
+    
+    public void setIssuedBooksToTable()
+    {
+        DefaultTableModel model;
+        try{
+            Connection con=ConnectionProvider.getCon();
+            PreparedStatement st=con.prepareStatement("select * from log_student");
+            ResultSet rs=st.executeQuery();
+            String sid="";
+            while(rs.next())
+            {
+                sid=rs.getString(1);
+            }
+            
+            st = con.prepareStatement("select bookid,issueddate,duedate,returneddate from issue where studentid=?");
+            st.setString(1,sid);
+            rs = st.executeQuery();
+            
+            model = (DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            
+            while(rs.next()){
+                String bookid = rs.getString(1);
+                String issueddate = rs.getString(2);
+                String duedate = rs.getString(3);
+                String returneddate = rs.getString(4);
+                String returnedstatus="YES";
+                if(returneddate.matches("-"))
+                {
+                    returnedstatus="NO";
+                }
+                String fine=String.valueOf(calculatefine(sid,bookid));
+                Object[] obj ={bookid,issueddate,duedate,returnedstatus,fine};
+                model.addRow(obj);     
+            }
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+    }
+    
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         setVisible(false);
