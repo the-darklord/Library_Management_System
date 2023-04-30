@@ -21,6 +21,7 @@ public class student_home extends javax.swing.JFrame {
      */
     public student_home() {
         initComponents();
+        jTextField1.setText("");
         setName();
     }
 
@@ -88,6 +89,11 @@ public class student_home extends javax.swing.JFrame {
         jTextField1.setFont(new java.awt.Font("Segoe UI Black", 1, 50)); // NOI18N
         jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jTextField1.setOpaque(true);
+        jTextField1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jTextField1ComponentShown(evt);
+            }
+        });
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -96,6 +102,11 @@ public class student_home extends javax.swing.JFrame {
         getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(590, 100, 920, 80));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/1567665.jpg"))); // NOI18N
+        jLabel3.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jLabel3ComponentShown(evt);
+            }
+        });
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 1920, 1080));
 
         pack();
@@ -148,6 +159,15 @@ public class student_home extends javax.swing.JFrame {
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jLabel3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jLabel3ComponentShown
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel3ComponentShown
+
+    private void jTextField1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTextField1ComponentShown
+        // TODO add your handling code here:
+        setName();
+    }//GEN-LAST:event_jTextField1ComponentShown
 
     /**
      * @param args the command line arguments

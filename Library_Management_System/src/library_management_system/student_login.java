@@ -109,6 +109,8 @@ public class student_login extends javax.swing.JFrame {
                 String enteredHash=Encryption.encrypt(password, salt);
                 if(enteredHash.matches(correctHash))
                 {
+                    st=con.prepareStatement("delete from log_student");
+                    st.executeUpdate();
                     st=con.prepareStatement("insert into log_student values(?,current_date,current_timestamp)");
                     st.setString(1,userid);
                     st.executeUpdate();

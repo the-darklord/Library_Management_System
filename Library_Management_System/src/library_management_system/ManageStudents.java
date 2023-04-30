@@ -8,6 +8,7 @@ import Project.*;
 import java.sql.*;
 import javax.swing.*;
 import javax.swing.table.*;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -27,22 +28,9 @@ public class ManageStudents extends javax.swing.JFrame {
         try{
             Connection con = ConnectionProvider.getCon();
             Statement st = con.createStatement();
-            ResultSet rs = st.executeQuery("select * from student");
+            ResultSet rs = st.executeQuery("select * from student order by studentid");
             
-            while(rs.next()){
-                String studentid = rs.getString(1);
-                String name = rs.getString(2);
-                String fathername = rs.getString(3);
-                String mothername = rs.getString(4);
-                String gender = rs.getString(5);
-                String mobilenumber = rs.getString(6);
-                String branchname=rs.getString(7);
-                String address = rs.getString(8);
-                
-                Object[] obj ={studentid,name,fathername,mothername,gender,mobilenumber,branchname,address};
-                model = (DefaultTableModel)StudentTable.getModel();
-                model.addRow(obj);     
-            }
+            StudentTable.setModel(DbUtils.resultSetToTableModel(rs));
         }
         catch(Exception e){
             e.printStackTrace();

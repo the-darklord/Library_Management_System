@@ -90,3 +90,5 @@ alter table student_credentials add constraint PK_STUDENTID_CREDENTIALS PRIMARY 
 alter table librarian_credentials add constraint PK_LIBRARIANID_CREDENTIALS PRIMARY KEY(LibrarianID);
 
 alter table log_student add constraint FK_STUDENTID_LOG FOREIGN KEY(StudentID) references Student(StudentID) ON DELETE CASCADE;
+
+alter table log_student add constraint PK_LOG_STUDENT PRIMARY KEY(StudentID,Log_Date,Log_Time);

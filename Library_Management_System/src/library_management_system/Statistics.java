@@ -7,7 +7,8 @@ package library_management_system;
 import java.sql.*;
 import Project.*;
 import javax.swing.*;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -20,9 +21,6 @@ public class Statistics extends javax.swing.JFrame {
      */
     public Statistics() {
         initComponents();
-        clearTable();
-        setIssueDetailsToTable();
-        setReturnDetailsToTable();
     }
 
     /**
@@ -56,7 +54,7 @@ public class Statistics extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("RETURN DETAILS");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-100, 450, 1740, 34));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(-110, 430, 1740, 34));
 
         jTable1.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -83,6 +81,7 @@ public class Statistics extends javax.swing.JFrame {
             }
         });
         jTable1.setColumnSelectionAllowed(true);
+        jTable1.setOpaque(false);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jTable1.setShowGrid(true);
@@ -104,7 +103,7 @@ public class Statistics extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(5).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1530, 378));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 1530, 360));
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Black", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,6 +136,7 @@ public class Statistics extends javax.swing.JFrame {
             }
         });
         jTable3.setColumnSelectionAllowed(true);
+        jTable3.setOpaque(false);
         jTable3.getTableHeader().setReorderingAllowed(false);
         jTable3.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -155,9 +155,10 @@ public class Statistics extends javax.swing.JFrame {
             jTable3.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 490, 1530, 590));
+        getContentPane().add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 470, 1530, 390));
 
         jButton1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/library_management_system/red-x-mark-transparent-background-3.png"))); // NOI18N
         jButton1.setText("CLOSE");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -172,10 +173,6 @@ public class Statistics extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public void clearTable(){
-          DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
-          model.setRowCount(0);
-    }
     
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -186,66 +183,27 @@ public class Statistics extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTable1ComponentShown
 
-    public void setIssueDetailsToTable()
-    {
-        DefaultTableModel model;
-        try{
-            Connection con = ConnectionProvider.getCon();
-            Statement st = con.createStatement();
-            String query="select s.studentid,s.name,bookid,book.name,issueddate,duedate from student s,book natural join issue where s.studentid=issue.studentid and returneddate='-'";
-            ResultSet rs = st.executeQuery(query);
-            
-            while(rs.next()){
-                String studentid = rs.getString(1);
-                String sname = rs.getString(2);
-                String bookid = rs.getString(3);
-                String bname = rs.getString(4);
-                String issueddate = rs.getString(5);
-                String duedate = rs.getString(6);
-                
-                Object[] obj ={studentid,sname,bookid,bname,issueddate,duedate};
-                model = (DefaultTableModel)jTable1.getModel();
-                model.addRow(obj);     
-            }
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getMessage());
-        }
-    }
-    
-    public void setReturnDetailsToTable()
-    {
-        DefaultTableModel model;
-        try{
-            Connection con = ConnectionProvider.getCon();
-            Statement st = con.createStatement();
-            String query="select s.studentid,s.name,bookid,book.name,issueddate,duedate,returneddate from student s,book natural join issue where s.studentid=issue.studentid and returneddate<>'-'";
-            ResultSet rs = st.executeQuery(query);
-            
-            while(rs.next()){
-                String studentid = rs.getString(1);
-                String sname = rs.getString(2);
-                String bookid = rs.getString(3);
-                String bname = rs.getString(4);
-                String issueddate = rs.getString(5);
-                String duedate = rs.getString(6);
-                String returneddate=rs.getString(7);
-                
-                Object[] obj ={studentid,sname,bookid,bname,issueddate,duedate,returneddate};
-                model = (DefaultTableModel)jTable3.getModel();
-                model.addRow(obj);     
-            }
-        }
-        catch(Exception e){
-            JOptionPane.showMessageDialog(null,e.getMessage());
-        }
-    }
     
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         // TODO add your handling code here:
-        clearTable();
-        setIssueDetailsToTable();
-        setReturnDetailsToTable();
+        try
+        {
+            DefaultTableModel model;
+            model=(DefaultTableModel)jTable1.getModel();
+            model.setRowCount(0);
+            model=(DefaultTableModel)jTable3.getModel();
+            model.setRowCount(0);
+            Connection con=ConnectionProvider.getCon();
+            Statement st=con.createStatement();
+            ResultSet rs=st.executeQuery("select issue.studentid,student.name,issue.bookid,book.name,issue.issueddate,issue.duedate from student , book , issue where student.studentid=issue.studentid and book.bookid=issue.bookid and issue.returneddate='-' order by issue.studentid");
+            jTable1.setModel(DbUtils.resultSetToTableModel(rs));
+            ResultSet rs1=st.executeQuery("select issue.studentid,student.name,issue.bookid,book.name,issue.issueddate,issue.duedate,issue.returneddate from student , book , issue where student.studentid=issue.studentid and book.bookid=issue.bookid and issue.returneddate<>'-' order by issue.studentid");
+            jTable3.setModel(DbUtils.resultSetToTableModel(rs1));
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null,e.getMessage());
+        }
     }//GEN-LAST:event_formComponentShown
 
     private void jTable3ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jTable3ComponentShown

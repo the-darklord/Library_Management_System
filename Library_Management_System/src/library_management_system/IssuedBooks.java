@@ -117,6 +117,7 @@ public class IssuedBooks extends javax.swing.JFrame {
     public static int calculatefine(String sid,String bid)
     {
         int days=0;
+        int fine=0;
         try
         {
             Connection con=ConnectionProvider.getCon();
@@ -150,12 +151,24 @@ public class IssuedBooks extends javax.swing.JFrame {
             {
                 days=Integer.valueOf(rs.getString(1));
             }
+            if(days<=7)
+            {
+                fine=days;
+            }
+            if(days>7&&days<=14)
+            {
+                fine += (days-7)*3;
+            }
+            if(days>14)
+            {
+                fine+= (days-14)*5;
+            }
         }
         catch(Exception e)
         {
             e.printStackTrace();
         }
-        return days;
+        return fine;
     }
     
     public void setIssuedBooksToTable()
