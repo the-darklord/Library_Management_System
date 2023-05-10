@@ -64,6 +64,7 @@ salt varchar(20) not null
 );
 
 create table log_student(
+    log_id number GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     StudentID varchar(10),
     Log_Date date,
     Log_Time timestamp
@@ -77,7 +78,7 @@ alter table issue add constraint FK_BOOKID FOREIGN KEY(BookID) references book(B
 
 alter table issue add constraint FK_STUDENTID FOREIGN KEY(StudentID) references student(StudentID) ON DELETE CASCADE;
 
-alter table issue add constraint PK_BOOKID_STUDENTID PRIMARY KEY(BookID,StudentID);
+alter table issue add constraint PK_BOOKID_STUDENTID_ISSUEDDATE PRIMARY KEY(BookID,StudentID,IssuedDate);
 
 alter table librarian add constraint PK_LIBRARIANID PRIMARY KEY(LibrarianID);
 
@@ -91,4 +92,4 @@ alter table librarian_credentials add constraint PK_LIBRARIANID_CREDENTIALS PRIM
 
 alter table log_student add constraint FK_STUDENTID_LOG FOREIGN KEY(StudentID) references Student(StudentID) ON DELETE CASCADE;
 
-alter table log_student add constraint PK_LOG_STUDENT PRIMARY KEY(StudentID,Log_Date,Log_Time);
+alter table log_student add constraint PK_LOG_STUDENT PRIMARY KEY(log_id);

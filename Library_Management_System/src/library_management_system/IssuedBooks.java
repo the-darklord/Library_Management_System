@@ -8,6 +8,7 @@ import java.util.*;
 import Project.*;
 import java.sql.*;
 import javax.swing.table.*;
+import javax.swing.*;
 
 
 /**
@@ -121,32 +122,33 @@ public class IssuedBooks extends javax.swing.JFrame {
         try
         {
             Connection con=ConnectionProvider.getCon();
-            PreparedStatement st=con.prepareStatement("select returneddate,issueddate from issue where studentid=? and bookid=?");
+            PreparedStatement st=con.prepareStatement("select returneddate,duedate from issue where studentid=? and bookid=?");
             st.setString(1,sid);
             st.setString(2,bid);
             ResultSet rs=st.executeQuery();
             String rd="";
-            String id="";
+            String dd="";
             while(rs.next())
             {
                 rd=rs.getString(1);
-                id=rs.getString(2);
+                dd=rs.getString(2);
             }
             if(rd.matches("-"))
             {
-                st=con.prepareStatement("select extract(day from sysdate - to_date(?,?) from dual");
-                st.setString(1,id);
-                st.setString(2, "YYYY-MM-DD");
+                st=con.prepareStatement("select trunc(sysdate-to_date(?,?)) from dual");
+                st.setString(1,dd);
+                st.setString(2, "DD-MON-YYYY");
+                rs=st.executeQuery();
             }
             else
             {
-                st=con.prepareStatement("select extract(day from to_date(?,?) - to_date(?,?) from dual");
+                st=con.prepareStatement("select trunc(to_date(?,?) - to_date(?,?)) from dual");
                 st.setString(1,rd);
-                st.setString(2, "YYYY-MM-DD");
-                st.setString(3,id);
-                st.setString(4, "YYYY-MM-DD");
+                st.setString(2, "DD-MON-YYYY");
+                st.setString(3,dd);
+                st.setString(4, "DD-MON-YYYY");
+                rs=st.executeQuery();
             }
-            rs=st.executeQuery();
             while(rs.next())
             {
                 days=Integer.valueOf(rs.getString(1));
@@ -155,18 +157,18 @@ public class IssuedBooks extends javax.swing.JFrame {
             {
                 fine=days;
             }
-            if(days>7&&days<=14)
+            else if(days>7&&days<=14)
             {
-                fine += (days-7)*3;
+                fine = 7 + (days-7)*3;
             }
-            if(days>14)
+            else if(days>14)
             {
-                fine+= (days-14)*5;
+                fine = 7 + 7*3 + (days-14)*5;
             }
         }
         catch(Exception e)
         {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return fine;
     }
@@ -176,7 +178,7 @@ public class IssuedBooks extends javax.swing.JFrame {
         DefaultTableModel model;
         try{
             Connection con=ConnectionProvider.getCon();
-            PreparedStatement st=con.prepareStatement("select * from log_student");
+            PreparedStatement st=con.prepareStatement("select studentid from log_student where log_id in (select max(log_id) from log_student)");
             ResultSet rs=st.executeQuery();
             String sid="";
             while(rs.next())

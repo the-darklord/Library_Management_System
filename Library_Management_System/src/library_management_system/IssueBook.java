@@ -121,7 +121,7 @@ public class IssueBook extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
         String bid=jTextField1.getText();
         String sid=jTextField2.getText();
         String idate=df.format(jDateChooser1.getDate());

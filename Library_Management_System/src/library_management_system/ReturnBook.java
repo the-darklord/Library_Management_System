@@ -162,9 +162,9 @@ public class ReturnBook extends javax.swing.JFrame {
         {
             Connection con=ConnectionProvider.getCon();
             Statement st=con.createStatement();
-            SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat df = new SimpleDateFormat("dd-MMM-yyyy");
             String rdate;
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MM-yyyy");  
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd-MMM-yyyy");  
             LocalDateTime now = LocalDateTime.now();  
             rdate=dtf.format(now);
             st.executeUpdate("update issue set returneddate='"+rdate+"' where bookid='"+bid+"' and studentid='"+sid+"' and returneddate='-'");
