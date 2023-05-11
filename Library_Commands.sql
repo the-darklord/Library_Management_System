@@ -1,4 +1,12 @@
-drop table log_student;
+drop table login_log_student;
+
+drop table login_log_librarian;
+
+drop table Log_Student;
+
+drop table Log_Librarian;
+
+drop table Log_Book;
 
 drop table student_credentials;
 
@@ -63,9 +71,48 @@ Password varchar(100) not null,
 salt varchar(20) not null
 );
 
-create table log_student(
+CREATE TABLE Log_Student(
+dateofupdate timestamp,
+StudentID varchar(10),
+Name varchar(30),
+FatherName varchar(30),
+MotherName Varchar(30),
+Gender varchar(1),
+MobileNumber varchar(10),
+BranchName varchar(10),
+Address varchar(50)
+);
+
+create table Log_Librarian(
+dateofupdate timestamp,
+LibrarianID varchar(10),
+Name varchar(30),
+Gender varchar(1),
+MobileNumber varchar(10),
+Address varchar(50)
+);
+
+CREATE TABLE Log_Book(
+dateofupdate timestamp,
+BookID varchar(10),
+Name varchar(100),
+Author varchar(100),
+Publisher Varchar(100),
+Price varchar(10),
+PublishedYear varchar(5),
+Capacity varchar(10)
+);
+
+create table login_log_student(
     log_id number GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
     StudentID varchar(10),
+    Log_Date date,
+    Log_Time timestamp
+);
+
+create table login_log_librarian(
+    log_id number GENERATED ALWAYS as IDENTITY(START with 1 INCREMENT by 1),
+    LibrarianID varchar(10),
     Log_Date date,
     Log_Time timestamp
 );
@@ -90,6 +137,16 @@ alter table student_credentials add constraint PK_STUDENTID_CREDENTIALS PRIMARY 
 
 alter table librarian_credentials add constraint PK_LIBRARIANID_CREDENTIALS PRIMARY KEY(LibrarianID);
 
-alter table log_student add constraint FK_STUDENTID_LOG FOREIGN KEY(StudentID) references Student(StudentID) ON DELETE CASCADE;
+alter table login_log_student add constraint FK_STUDENTID_LOGIN FOREIGN KEY(StudentID) references Student(StudentID) ON DELETE CASCADE;
 
-alter table log_student add constraint PK_LOG_STUDENT PRIMARY KEY(log_id);
+alter table login_log_student add constraint PK_LOGIN_STUDENT PRIMARY KEY(log_id);
+
+alter table login_log_librarian add constraint FK_LIBRARIAN_LOGIN FOREIGN KEY(LibrarianID) references Librarian(LibrarianID) ON DELETE CASCADE;
+
+alter table login_log_librarian add constraint PK_LOGIN_LIBRARIAN PRIMARY KEY(log_id);
+
+alter table Log_Student add constraint PK_LOG_STUDENT PRIMARY KEY(dateofupdate);
+
+alter table Log_Librarian add constraint PK_LOG_LIBRARIAN PRIMARY KEY(dateofupdate);
+
+alter table Log_Book add constraint PK_LOG_BOOK PRIMARY KEY(dateofupdate);

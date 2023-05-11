@@ -178,7 +178,7 @@ public class IssuedBooks extends javax.swing.JFrame {
         DefaultTableModel model;
         try{
             Connection con=ConnectionProvider.getCon();
-            PreparedStatement st=con.prepareStatement("select studentid from log_student where log_id in (select max(log_id) from log_student)");
+            PreparedStatement st=con.prepareStatement("select studentid from login_log_student where log_id in (select max(log_id) from login_log_student)");
             ResultSet rs=st.executeQuery();
             String sid="";
             while(rs.next())
